@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f78a236f-3cd7-4920-b3e3-2d90f364060b" name="fonteko" url="http://fonteko-apps.com">
+        <fileTransfer rootFolder="/var/fonteko" accessType="SFTP" host="176.31.154.72" port="21153" sshConfigId="9d1631f7-b6ed-498c-af31-5d247242cd1b" sshConfig="root@176.31.154.72:21153 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
