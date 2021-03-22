@@ -37,10 +37,6 @@ var server = new Server('localhost', 27017, {auto_reconnect: true});
 db = new Db('fonteko', server);
 var ObjectID = require('mongodb').ObjectID;
 
-
-//console.log(server);
-//console.log(db);
-
 db.open(function (err, db) {
     if (!err) {
         db.authenticate("AdminDbR@@t", "NewPass2015", function (err, res) {
