@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+<style>
+    .mhei{
+        min-height:20px;
+    }
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    .file {
+        visibility: hidden;
+        position: absolute;
+    }
+
+    #img-upload{
+        width: 100%;
+    }
+</style>
+<body>
+
+<div class="wrapper">
+
+    <% include navbar2 %>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div class="row">
+            <div class="col-1">
+                <button type="button" class="btn btn-primary newbt" data-toggle="modal" data-target="#myModal" style="margin-top: 5px;">
+                    Ajouter
+                </button>
+            </div>
+            <div class="col-11">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Push</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+
+
+
+
+            <% items.forEach( function( todo ){ %>
+
+
+
+            <div class="col-sx-4 col-md-4">
+
+                <div class="
+
+                                <%if(todo.state == "0"){ %>
+                                    alert alert-danger
+                                <% }else if(todo.state == "1"){ %>
+                                    alert alert-info
+                                <% }else if(todo.state == "2"){ %>
+                                    alert alert-success
+                                <% }%>">
+
+                    <div class="tile-header">
+                        <h5 snd-data-<%=todo._id%>="<%=todo.state%>">
+
+                            <%if(todo.state == "0"){ %>
+                                En attente de validation
+                            <% }else if(todo.state == "1"){ %>
+                                Planifié
+                            <% }else if(todo.state == "2"){ %>
+                                Délivré
+                            <% }%>
+
+
+                        </h5>
+
+
+                        <div >
+                            <h3 snd-data-<%=todo._id%>="dateenvoi"><%= todo.dateenvoi %></h3>
+                            <h4 snd-data-<%=todo._id%>="heure"><%= todo.heure %></h4>
+                        </div>
+
+
+
+                        <span><p style="height: 60px;" snd-data-<%=todo._id%>="message"><%= todo.message %></p></span>
+                        <div>
+                        <%if(todo.state == "0"){ %>
+                        <a class="btn btn-success btn-sm" href="/push/snd/<%=todo._id%>" role="button"><span class="fa fa-envelope" aria-hidden="true"></span></a>
+                        <button class="btn btn-info btn-sm editbt" data-toggle="modal" data-target="#myModal" data-id="<%=todo._id%>">
+                            <span class="fa fa-share" aria-hidden="true"></span>
+                        </button>
+                        <% }%>
+
+                        <!--<a class="btn btn-default btn-sm delbt" href="/push/del/<%=todo._id%>" role="button"><span class="fa fa-trash-o" aria-hidden="true"></span></a>-->
+                        <a class="btn btn-danger btn-sm delbt" onclick="confirmdel('<%=todo._id%>','feko-push','feko-push');" role="button">
+                            <span class="fa fa-trash" style="color:white;" aria-hidden="true"></span>
+                        </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <% }); %>
+
+
+        </div>
+
+
+
+
+</div>
+<!-- /Page Content  -->
+
+
+</div>
+<!-- /wrapper  -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal"  role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <form action="/add/push" method="post" accept-charset="utf-8" class="form" role="form" id="myform"  />
+        <input type="hidden" id="_id" name="_id" value="">
+        <input type="hidden" id="collection"  value="feko-push">
+        <input type="hidden" id="state" name="state" value="0">
+        <input type="hidden" id="production" name="production" value="1">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Ajouter une notification push
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="titre">Votre message</label>
+                            <input type="text" name="message" id="message" value="" class="form-control" placeholder="titre"  />
+                        </div>
+                        <br>
+
+
+
+                        <div class="form-group bmd-form-group is-filled" >
+                            <label for="dateenvoi">Date d‘envoi</label>
+                            <input type="date" class="form-control" value="" name="dateenvoi" id="dateenvoi">
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="heure">Heure d‘envoi</label>
+                            <input type="time" class="form-control" value="" name="heure" id="heure">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Annuler
+                </button>
+                <input type="submit" value="Valider" class="btn btn-primary">
+
+            </div>
+        </div><!-- /.modal-content -->
+        </form>
+
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- -->
+
+
+
+<% include bsjs %>
+
+<!-- Plugin for the momentJs  -->
+<script src="../assets/js/plugins/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/fr.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+
+    $(document).ready(function () {
+
+        $('#push').addClass("active");
+
+    });
+
+
+</script>
+</body>
+
+</html>

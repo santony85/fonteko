@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+
+<body>
+
+    <div class="wrapper">
+		
+		<% include navbar2 %>
+
+        <!-- Page Content  -->
+        <div id="content">
+        
+        <div class="row">
+       	  <div class="col-1">
+
+		  </div>
+          <div class="col-11">
+          <nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Accueil</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Clients</li>
+			</ol>
+		  </nav>
+		  </div>
+		</div>
+		
+		<table data-toggle="table"
+		 	class="table table-condensed table-striped table-sm"
+            data-url="/liste/feko-client"
+            data-pagination="true" 
+            data-search="true"
+            data-show-columns="true"
+            data-page-size="100"
+            id= "mtable"
+            data-page-list="[100, 200, 500, 1000]">
+            
+			<thead>
+				<tr>
+                  
+
+                                <th data-field="_id"    class="d-none" data-formatter="genericFm">_id</th>
+                                <th data-field="email"    data-valign="middle" data-formatter="genericFm">Email</th>
+                                <th data-field="active" data-valign="middle" data-formatter="genericFm">Active</th>
+                                <th data-field="name" 	data-valign="middle" data-formatter="genericFm">Nom</th>
+                                <th data-field="date"  data-valign="middle" data-formatter="dateFm">Date</th>
+                                <th data-width="100px" data-field="_id"    data-valign="middle" data-formatter="editFm">Action</th>
+				</tr>
+			</thead>
+
+    </table>
+
+		</div>
+		<!-- /Page Content  -->
+		
+		
+    </div>
+    <!-- /wrapper  -->
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    
+      <form action="/addobj/feko-client" method="POST" id="myform"> 
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	 <input type="text" class="d-none" name="_id" id="_id">
+      	 
+         <div class="form-group">
+		 	<label for="nom">Nom:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le nom" name="nom" id="nom" required>
+		 </div>
+		 
+		 <div class="form-group">
+		 	<label for="prenom">Prenom:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le prenom" name="prenom" id="prenom" required>
+		 </div>
+  
+		 <div class="form-group">
+		 	<label for="tel">Telephone:</label>
+		 	<input type="number" class="form-control" placeholder="Entrer le telephone" id="tel" name="tel" required>
+		 </div>
+       
+		 <div class="form-group">
+		 	<label for="email">Email address:</label>
+		 	<input type="email" class="form-control" placeholder="Entrer l'email" id="email" name="email" required>
+		 </div>
+		 
+		 <div class="form-group">
+		 	<label for="pwd">Password:</label>
+		 	<input type="text" class="form-control" placeholder="Enter password" id="pwd" name="mdp" required>
+		 </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary" >Envoyer</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+    
+	<% include bsjs %>
+
+    <script type="text/javascript">
+    
+        function dateFm(value, row){
+	    var d = new Date(value);
+	    var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0"+(d.getMonth()+1)).slice(-2) + "/" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+        return  datestring;
+    	}
+
+    
+        function genericFm(value, row, index,field) {
+
+	        return '<a snd-data-'+row['_id']+'="'+field+'">'+value+'</a>';
+	       
+        }
+    
+    	function editFm(value, row) {
+        var c = this;
+        return '<button class="btn btn-sm  btn-warning" onclick="'+"confirmdel('"+row['_id']+"','feko-client','feko-client');"+'"><span class="fa fa-lock" aria-hidden="true"></span></button>';
+        }
+
+    
+        function delFm(value, row) {
+        	//return '<a href="#" id="mdp" data-type="text" data-url="/utilisateurs/del" data-pk="'+row['_id']+'" data-name="_id">Supprimer</a>';
+        	return '<button type="button" class="btn btn-danger" onclick="'+"confirmdel('"+row['_id']+"');"+'"><i class="fas fa-trash-alt"></i></button>&nbsp;'+
+               	   '<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-info editbt" onclick="editobj('+"'"+row['_id']+"'"+')"><i class="fas fa-pencil-alt"></i></button>';
+    	}
+    
+
+		
+        $(document).ready(function () {
+
+            $('#client').addClass("active");
+            
+            
+        });
+         
+    </script>
+</body>
+
+</html>

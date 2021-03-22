@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 8]>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+<!--[if IE 8 ]> <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie9"> <![endif]-->
+<!--[if IE 7]>
+<script type="text/javascript">
+    location.replace("http://windows.microsoft.com/en-US/internet-explorer/products/ie/home");
+</script>
+<![endif]-->
+
+<html>
+<head>
+    <title>Qbiq</title>
+    <link rel="icon" type="image/png" href="../media/favicon.png">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="css2/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/custom-style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--<script src="js/jquery-1.7.1.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="js/modernizr.custom.js"></script>
+    <link rel="stylesheet" href="css/prettyPhoto.css" />
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="../js2/miam.js"></script>
+    <script src="../js2/bootbox.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js">
+    </script>-->
+    <script type="text/javascript">
+
+        jQuery(document).ready(function() {
+
+            $(".fa-search-btn").prettyPhoto();
+
+
+        });
+
+    </script>
+
+    <style>
+        li {
+            margin-bottom: 20px !important;
+        }
+        #pswd_info {
+            position:absolute;
+            bottom:30px;
+            bottom: -115px\9; /* IE Specific */
+            /*right:55px;*/
+            width:250px;
+            padding:15px;
+            background:#fefefe;
+            font-size:.875em;
+            border-radius:5px;
+            box-shadow:0 1px 3px #ccc;
+            border:1px solid #ddd;
+        }
+        #pswd_info h4 {
+            margin:0 0 10px 0;
+            padding:0;
+            font-weight:normal;
+        }
+        #pswd_info::before {
+            content: "\25B2";
+            position:absolute;
+            top:-12px;
+            left:45%;
+            font-size:14px;
+            line-height:14px;
+            color:#ddd;
+            text-shadow:none;
+            display:block;
+        }
+        .invalid {
+            background:url(../images/cross.png) no-repeat 0 50%;
+            padding-left:22px;
+            line-height:24px;
+            color:#ec3f41;
+        }
+        .valid {
+            background:url(../images/tick.png) no-repeat 0 50%;
+            padding-left:22px;
+            line-height:24px;
+            color:#3a7d34;
+        }
+        #pswd_info {
+            display:none;
+        }
+    </style>
+</head>
+
+<body id="index" class=" ">
+<div id="page" class="clearfix">
+    <% include headercata.ejs %>
+
+    <div class="category-full-image">
+
+
+        <ul class="category-slider">
+            <li> <img src="media/page-title-bg.jpg" ></li>
+        </ul>
+    </div>
+
+
+
+    <div class="container_9 title-container">
+        <div class="page-title first-bg"> Shopping Cart </div>
+        <div class="breadcrumb"> <a title="return to Home" href="../../../index.html">Home</a> <span class="navigation-pipe">/</span> <span class="navigation_page">Shopping Cart</span> </div>
+    </div>
+    <section  id="columns" class="container_9 clearfix col1">
+
+        <!-- Center -->
+        <article id="center_column" class=" grid_5">
+            <ol id="checkoutSteps" class="opc">
+                <li class="section allow active fadeIn" id="opc-login">
+
+                    <!--<div class="step-title"> <span class="number">ETAPE  1</span>
+                        <h2>IDENTIFICATION</h2>
+                        <a href="#">Edit</a> </div>-->
+
+                    <div style="" class="step a-item" id="checkout-step-login">
+                        <div class="col2-set">
+                            <div class="col-1">
+                                <h3>Nouveau client</h3>
+                                <div class="wrap-login">
+                                    <p></p>
+                                    <p>Vous n'avez pas encore de compte ?</p>
+                                    <p>Créez en un !! </p>
+                                    <p>Et gagnez du temps pour votre prochaine commande !</p>
+                                    <div class="buttons-set">
+                                        <button onclick="setMethod(0);" class="button" type="button" id="onepage-guest-register-button"><span><span>Créer mon compte</span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <h3>J'ai deja un compte</h3>
+                                <div class="wrap-login">
+                                    <form method="POST" id="login-form">
+                                        <fieldset>
+                                            <ul class="form-list">
+                                                <li>
+                                                    <label class="required" for="login-email"><emx>*</emx>Adresse Email</label>
+                                                    <div class="input-box">
+                                                        <input type="email" value="" name="login" id="login-email" class="input-text required-entry validate-email">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label class="required" for="login-password"><emx>*</emx>Mot de passe</label>
+                                                    <div class="input-box">
+                                                        <input type="password" name="password" id="login-password" class="input-text required-entry">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <input type="hidden" value="checkout" name="context">
+                                        </fieldset>
+                                    </form>
+                                    <div class="buttons-set">
+                                        <button onclick="sndlogin();" class="button" type="button" id="onepage-guest-register-button"><span><span>Je me connecte</span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="section fadeIn " id="opc-billing">
+                    <!--<div class="step-title"> <span class="number">ETAPE  2</span>
+                        <h2>INFORMATIONS PERSONNELLES</h2>
+                        <a href="#">Edit</a> </div>-->
+                    <div style="/*display:none;*/" class="step a-item" id="checkout-step-billing">
+                        <form name="form" method="POST" id="formclient">
+                            <input type="hidden" id="idclient" name="idclient" value="">
+
+                            <fieldset>
+                                <ul class="form-list">
+                                    <li id="billing-new-address-form">
+                                        <fieldset>
+
+                                            <ul>
+                                                <li class="fields">
+                                                    <div class="customer-name">
+                                                        <div class="field name-firstname">
+                                                            <label class="required" for="billing:firstname"><em>*</em>Prénom</label>
+                                                            <div class="input-box">
+                                                                <input type="text" class="input-text required-entry" maxlength="255" title="Prénom" value="" name="prenom" id="billing:firstname" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="field name-lastname">
+                                                            <label class="required" for="billing:lastname"><em>*</em>Nom</label>
+                                                            <div class="input-box">
+                                                                <input type="text" class="input-text required-entry" maxlength="255" title="Nom" value="" name="nom" id="billing:lastname" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="fields">
+                                                    <div class="field">
+                                                        <label for="billing:company">Société</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text " title="Société" value="" name="societe" id="billing:company">
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label class="required" for="billing:email"><em>*</em>Email</label>
+                                                        <div class="input-box">
+                                                            <input type="email" class="input-text required-entry" title="Email" value="" id="billing:email" name="email" required>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="wide">
+                                                    <div class="field">
+                                                        <label class="required" for="billing:street1"><em>*</em>Adresse</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text  required-entry" value="" id="billing:street1" name="adresse1" title="Street Address" required>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- <li class="wide">
+                                                     <div class="field">
+                                                     <div class="input-box">
+                                                         <input type="text" class="input-text " value="" id="billing:street2" name="adresse2" title="adr2">
+                                                     </div>
+                                                     </div>
+                                                 </li>-->
+                                                <li class="wide">
+                                                    <div class="field">
+                                                        <label class="required" for="billing:city"><em>*</em>Ville</label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="billing:city" class="input-text  required-entry" value="" name="ville" title="City" required>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="fields">
+                                                    <div class="field">
+                                                        <label class="required" for="billing:postcode"><em>*</em>Code postal</label>
+                                                        <div class="input-box">
+                                                            <input type="text" class="input-text validate-zip-international  required-entry" value="" id="billing:postcode" name="cp" title="Zip/Postal Code" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label class="required" for="billing:region_id"><em>*</em>Pays</label>
+                                                        <div class="input-box">
+                                                            <select id="js-country" name="pays" custom_placeholder="Pays" class="validate-select" autocomplete="off" required>
+                                                                <option value="1" data-country="FR" data-default-language="fr" data-short-label="fr" selected> France</option>
+
+                                                                <option value="6" data-country="DE" data-default-language="de" data-short-label="de"> Deutschland</option>
+
+                                                                <option value="11" data-country="AT" data-default-language="de" data-short-label="at"> Österreich</option>
+
+                                                                <option value="2" data-country="BE" data-default-language="fr" data-short-label="be"> Belgique</option>
+
+                                                                <option value="3" data-country="ES" data-default-language="es" data-short-label="es"> España</option>
+
+                                                                <option value="4" data-country="IT" data-default-language="it" data-short-label="it"> Italia</option>
+
+                                                                <option value="7" data-country="LU" data-default-language="fr" data-short-label="lu"> Luxembourg</option>
+
+                                                                <option value="10" data-country="NL" data-default-language="nl" data-short-label="nl"> Nederland</option>
+
+                                                                <option value="9" data-country="PT" data-default-language="pt" data-short-label="pt"> Portugal</option>
+
+                                                                <option value="5" data-country="UK" data-default-language="en" data-short-label="uk"> United Kingdom</option>
+
+                                                                <option value="8" data-country="CH" data-default-language="fr" data-short-label="ch"> Suisse</option>
+                                                            </select required>
+                                                            <input type="text" style="display:none;" class="input-text regions required-entry" title="Pays" value="" name="pays" id="billing:region">
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="fields">
+                                                    <div class="field">
+                                                        <label class="required" for="billing:telephone"><em>*</em>Telephone</label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="billing:telephone" class="input-text  required-entry" title="Telephone" value="" name="telephone" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="field">
+                                                        <label for="billing:fax">Fax</label>
+                                                        <div class="input-box">
+                                                            <input type="text" id="billing:fax" class="input-text " title="Fax" value="" name="fax">
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <div id="passwordform" >
+                                                    <li id="register-customer-password" class="fields">
+                                                        <div class="field">
+                                                            <label class="required" for="billing:customer_password"><em>*</em>Password</label>
+                                                            <div class="input-box">
+                                                                <input type="password" class="input-text required-entry validate-password" title="Password" id="password" name="password" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="field">
+                                                            <label class="required" for="billing:confirm_password"><em>*</em>Confirm Password</label>
+                                                            <div class="input-box">
+                                                                <input type="password" class="input-text required-entry validate-cpassword" id="cpassword" title="Confirm Password" name="cpassword" required>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </div>
+
+                                            </ul>
+                                        </fieldset>
+                                    </li>
+
+                                </ul>
+                                <div id="billing-buttons-container" class="buttons-set">
+                                    <p class="required">* Required Fields</p>
+                                    <button  onclick="sndclient();" class="button" title="Continue" type="button" ><span><span>Suivant</span></span></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                        <div id="pswd_info">
+                            <h4>Password must meet the following requirements:</h4>
+                            <ul>
+                                <li id="letter" class="invalid">At least <strong>one letter</strong></li>
+                                <li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                                <li id="number" class="invalid">At least <strong>one number</strong></li>
+                                <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </article>
+
+
+
+
+
+    </section>
+
+    <% include footercata.ejs %>
+
+</div>
+
+<script type="text/javascript">
+    var isReg="register";
+    $(document).ready(function() {
+        $('#checkout-step-billing').addClass("myhide");
+        $("#formclient").validate({
+            rules: {
+                prenom: "required",
+                nom: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                adresse1: "required",
+                ville: "required",
+                cp: "required",
+                telephone: "required",
+                password: "required",
+                cpassword: {
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                prenom: "Please specify your name",
+                nom: "Please specify your name",
+                email: {
+                    required: "We need your email address to contact you",
+                    email: "Your email address must be in the format of name@domain.com"
+                },
+                adresse1: "required",
+                ville: "required",
+                cp: "required",
+                telephone: "required",
+                password: "required",
+                confirm_password: "required",
+            },
+
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            }
+        });
+        $("#login-form").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: "required",
+            },
+            messages: {
+                email: "required",
+                password: "required"
+            },
+
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            }
+        });
+        $("#formlivraison").validate({
+            rules: {
+                adresse1: "required",
+                ville: "required",
+                cp: "required",
+            },
+            messages: {
+                adresse1: "required",
+                ville: "required",
+                cp: "required",
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                // Add the `help-block` class to the error element
+                error.addClass( "help-block" );
+
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
+            }
+        });
+        $( "input" ).on( "click", function() {
+            isReg= $( "input:checked" ).val();
+        });
+        $('input[type=password]').keyup(function() {
+            // keyup code here
+            var pswd = $(this).val();
+            //validate the length
+            if ( pswd.length < 8 ) {
+                $('#length').removeClass('valid').addClass('invalid');
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+            }
+            //validate letter
+            if ( pswd.match(/[A-z]/) ) {
+                $('#letter').removeClass('invalid').addClass('valid');
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+            }
+
+//validate capital letter
+            if ( pswd.match(/[A-Z]/) ) {
+                $('#capital').removeClass('invalid').addClass('valid');
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+            }
+
+//validate number
+            if ( pswd.match(/\d/) ) {
+                $('#number').removeClass('invalid').addClass('valid');
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+            }
+
+        }).focus(function() {
+            $('#pswd_info').show();
+        }).blur(function() {
+            $('#pswd_info').hide();
+        });
+
+    });
+    function sndclient() {
+        /****************************/
+        /**** 3  CAS *******/
+        /****** CAS 1 = client avec rec ****/
+        /****** CAS 2 = client sans rec ****/
+        /****** CAS 3 = client qui se rec ****/
+        /** si CAS 2 ET 3 ***/
+        if ($("#formclient").valid()) {   // test for validity
+            // do stuff if form is valid
+            if(document.getElementById("idclient").value ===''){
+                var form = document.getElementById("formclient");
+                var formData = new FormData(form);
+                var txttosend = "";
+                for (var [key, value] of formData.entries()) {
+                    txttosend += key + "=" + value + "&";
+                }
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/addobjet/clients', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onerror = function (e) {
+                    //showInfo('An error occurred while submitting the form. Maybe your file is too big');
+                };
+                xhr.onload = function () {
+                    document.getElementById("clientid").value = xhr.responseText;
+                    setMethod(2);
+                };
+                xhr.send(txttosend);
+            }
+
+        } else {
+            // do stuff if form is not valid
+        }
+        /** FIN CAS 2 ET 3 **/
+
+    }
+    function sndlogin() {
+
+        if($("#login-form").valid()){   // test for validity
+            // do stuff if form is valid
+            var form = document.getElementById("login-form");
+            var formData = new FormData(form);
+            var txttosend="";
+            for (var [key, value] of formData.entries()) {
+                txttosend += key+"="+value+"&";
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/loginfo', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onerror = function(e) {
+                //showInfo('An error occurred while submitting the form. Maybe your file is too big');
+            };
+            xhr.onload = function() {
+
+                if(xhr.responseText !== "error 1"){
+
+                    /*var client= JSON.parse(xhr.responseText);
+                    document.getElementById("idclient").value = client._id;
+                    document.getElementById("billing:firstname").value = client.prenom;
+                    document.getElementById("billing:lastname").value = client.nom;
+                    document.getElementById("billing:company").value = client.societe;
+                    document.getElementById("billing:email").value = client.email;
+                    document.getElementById("billing:street1").value = client.adresse1;
+                    document.getElementById("billing:city").value = client.ville;
+                    document.getElementById("billing:postcode").value = client.cp;
+                    document.getElementById("billing:telephone").value = client.telephone;
+                    document.getElementById("billing:fax").value = client.fax;
+                    setMethod(1);*/
+                    $(location).attr('href','/');
+
+                }
+
+
+            };
+
+            xhr.send(txttosend);
+
+        } else {
+            // do stuff if form is not valid
+        }
+
+
+
+
+
+    };
+
+
+    function setMethod(num){
+        if(num==0){
+            $('#checkout-step-billing').removeClass( "myhide" );
+            $('#opc-billing').addClass("active");
+            //$('#checkout-step-login').addClass("myhide");
+            $('#opc-login').removeClass( "active" );
+            //if(isReg=="register")$('#passwordform').removeClass( "myhide" );
+        }
+        else if(num==1){
+            $('#checkout-step-billing').removeClass( "myhide" );
+            $('#opc-billing').addClass("active");
+            $('#checkout-step-login').addClass("myhide");
+            $('#opc-login').removeClass( "active" );
+
+        }
+        else if(num==2){
+
+            $('#opc-billing').removeClass("active");
+            $('#checkout-step-billing').addClass("myhide");
+            $('#opc-shipping').addClass( "active" );
+            $('#checkout-step-shipping').removeClass("myhide");
+
+
+
+
+        }
+
+    }
+</script>
+</body>
+</html>
+
+<!-- Localized -->

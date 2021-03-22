@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+
+
+<body>
+
+    <div class="wrapper">
+		
+		<% include navbar2 %>
+
+        <!-- Page Content  -->
+        <div id="content">
+        
+        <div class="row">
+       	  <div class="col-1">
+		  	<button type="button" class="btn btn-primary newbt" data-toggle="modal" data-target="#exampleModalCenter" style="margin-top: 5px;">
+				 Ajouter
+			 </button>
+		  </div>
+          <div class="col-11">
+          <nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Accueil</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Fontaines</li>
+			</ol>
+		  </nav>
+		  </div>
+		</div>
+		
+		<table data-toggle="table"
+		 	class="table table-condensed table-sm"
+            data-url="/liste/feko-fontaine"
+            data-pagination="true" 
+            data-search="true"
+            data-show-columns="true"
+            data-page-size="100"
+            id= "mtable"
+            data-flat="true"
+			data-detail-view="true"
+			data-detail-formatter="detailFormatter"
+			data-row-style="rowStyle"
+            data-page-list="[100, 200, 500, 1000]">
+            
+			<thead>
+				<tr>
+                  
+
+                                        	<th data-field="_id" class="d-none" data-formatter="genericFm">id</th>
+                                        	<th data-field="nom" data-formatter="genericFm">Nom</th>
+											<th data-field="numfontaine" data-formatter="genericFm">Numero</th>
+											<th data-field="adresse" data-formatter="genericFm">Adresse</th>
+											<th data-field="private" class="d-none" data-formatter="genericFm">Adresse</th>
+											<th data-field="stripe" class="d-none" data-formatter="genericFm">Stripe</th>
+											<th data-field="kstripe" class="d-none" data-formatter="genericFm">Stripe</th>
+											<th data-field="lat" class="d-none" data-formatter="genericFm">Stripe</th>
+											<th data-field="long" class="d-none" data-formatter="genericFm">Stripe</th>
+											<th data-field="lot" data-formatter="genericFm" >Lot QrCode</th>
+
+					<th data-field="num" class="d-none"	data-valign="middle" data-formatter="genericFm" >Tel.</th>
+					<th data-field="rue" class="d-none" data-valign="middle" data-formatter="genericFm">Email</th>
+					<th data-field="cp" class="d-none"	data-valign="middle" data-formatter="genericFm" >Tel.</th>
+					<th data-field="ville" class="d-none" data-valign="middle" data-formatter="genericFm">Email</th>
+					<th data-field="idadr" class="d-none" data-valign="middle" data-formatter="genericFm">Email</th>
+											
+                                <th data-width="150px" data-field="_id"    data-valign="middle" data-formatter="delFm">Action</th>
+				</tr>
+			</thead>
+
+    </table>
+
+		</div>
+		<!-- /Page Content  -->
+		
+		
+    </div>
+    <!-- /wrapper  -->
+    
+    
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    
+    <form action="/add/fontaine" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form" role="form" id="myform"  >
+            <input type="hidden" id="_id" name="_id" value="">
+            <input type="hidden" id="collection"  value="feko-fontaine">
+            <input type="hidden" id="private"  name="private" value="false">
+            <input type="hidden" id="lot"  name="lot" value="">
+			<input type="hidden" id="idlot"  name="idlot" value="">
+			<input type="text" class="d-none" name="lat" id="lat">
+			<input type="text" class="d-none" name="long" id="long">
+			<input type="text" class="d-none" name="cp" id="cp">
+			<input type="text" class="d-none" name="ville" id="ville">
+			<input type="text" class="d-none" name="num" id="num">
+			<input type="text" class="d-none" name="rue" id="rue">
+			<input type="text" class="d-none" name="idadr" id="idadr">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	 <input type="text" class="d-none" name="_id" id="_id">
+      	 
+         <div class="form-group">
+		 	<label for="nom">Nom:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le nom" name="nom" id="nom" required>
+		 </div>
+		 
+		 <div class="form-group">
+		 	<label for="tel">Fontaine privée :</label>
+		 	<input type="checkbox" class="form-control"  id="isprivate" >
+		 </div>
+		
+		 <div class="form-group">
+		 	<label for="adresse">Adresse:</label>
+
+		 	  	<input type="text" class="advancedAutoComplete form-control term" autocomplete="anyrandomstring" placeholder="Entrer l'adresse" name="adresse" id="adresse" required>
+		 	  	<code class="basicAutoSelectSelected"></code>
+		 	
+		 </div>
+		 
+		 <div class="form-group">
+		 	<label for="tel">Numero de fontaine:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le numero" id="numfontaine" name="numfontaine" required>
+		 </div>
+  
+		 <div class="form-group">
+		 	<label for="tel">Stripe:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le stripe" id="stripe" name="stripe" required>
+		 </div>
+		 
+		 <div class="form-group">
+		 	<label for="tel">Cle Stripe:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer la cle stripe" id="kstripe" name="kstripe" required>
+		 </div>
+       
+
+		 
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary" >Envoyer</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenterLot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitleLot" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    
+
+           
+
+
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitleLot"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      
+      	 
+         <div class="form-group">
+		 	<label for="nom">Choisissez un lot:</label>
+		 	      <select class="custom-select mr-sm-2" id="lotqrcode" name="lotqrcode">
+		 		  	<option selected>Choose...</option>
+		 		  	<% lots.forEach( function( todo ){ %>
+		 		  		<option value="<%=todo._id %>"><%=todo.nom %></option>
+		 		  	<% }) %>
+		 		  </select>
+		 </div>
+		 
+
+       
+
+		 
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="assignQrCode()">Envoyer</button>
+      </div>
+  
+      
+    </div>
+  </div>
+</div>
+
+    
+	<% include bsjs %>
+	
+	<style>
+	.bg-vente{
+		background-color: #3D9970bd;
+	}
+</style>
+	
+
+	<script>
+
+		var idlot="";
+		var lot=""
+		var idfontaine="";
+		var isexp = 0;
+
+		function detailFormatter(index, row) {
+
+			if(isexp==1){
+				$("#mtable").bootstrapTable('collapseAllRows');
+				isexp=0;
+			}
+			else isexp=1;
+
+			var dtable='<table data-toggle="table"\n' +
+					' class="table table-condensed table-sm">' +
+					'<thead>\n' +
+					'<tr>\n' +
+					'<th class="text-center">10</th>\n' +
+					'<th class="text-center">20</th>\n' +
+					'<th class="text-center">30</th>\n' +
+					'<th class="text-center">40</th>\n' +
+					'<th class="text-center">60</th>\n' +
+					'<th class="text-center">80</th>\n' +
+					'</tr>\n' +
+					'</thead>\n' +
+					'<tbody>\n'
+
+			var model=""
+
+			if(row.idlot !== ""){
+			$.ajax({
+				url:'/listeqrcodelot/'+row.idlot,
+				type:'get',
+				async: false,
+				success:function(res){
+
+					var nb10_0 = nbCarte(res,"10","0");
+					var nb10_1 = nbCarte(res,"10","1");
+					var nb20_0 = nbCarte(res,"20","0");
+					var nb20_1 = nbCarte(res,"20","1");
+					var nb30_0 = nbCarte(res,"30","0");
+					var nb30_1 = nbCarte(res,"30","1");
+					var nb40_0 = nbCarte(res,"40","0");
+					var nb40_1 = nbCarte(res,"40","1");
+					var nb60_0 = nbCarte(res,"60","0");
+					var nb60_1 = nbCarte(res,"60","1");
+					var nb80_0 = nbCarte(res,"80","0");
+					var nb80_1 = nbCarte(res,"80","1");
+
+					dtable += '<tr>\n' +
+							'<td class="text-center">'+nb10_1+" / "+(nb10_1+nb10_0)+' reste : '+nb10_0+'</td>\n' +
+							'<td class="text-center">'+nb20_1+" / "+(nb20_1+nb20_0)+' reste : '+nb20_0+'</td>\n' +
+							'<td class="text-center">'+nb30_1+" / "+(nb30_1+nb30_0)+' reste : '+nb30_0+'</td>\n' +
+							'<td class="text-center">'+nb40_1+" / "+(nb40_1+nb40_0)+' reste : '+nb40_0+'</td>\n' +
+							'<td class="text-center">'+nb60_1+" / "+(nb60_1+nb60_0)+' reste : '+nb60_0+'</td>\n' +
+							'<td class="text-center">'+nb80_1+" / "+(nb80_1+nb80_0)+' reste : '+nb80_0+'</td>\n' +
+							'</tr>\n'
+
+					dtable += '</tbody>\n' +
+							  '</table>'
+
+
+					model=
+							'<div class="card">\n' +
+							'  <div class="card-body">'+dtable+'</div>\n' +
+							'</div>';
+
+					//return "model"
+				}
+			});
+			return model
+			}
+			else return "Pas de QrCodes afféctés"
+		}
+		function nbCarte(data,initial,state) {
+			return data.map(function (row) {
+				if(row.initial==initial && row.status==state)return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+		function rowStyle(row) {
+			var classes = [
+				'bg-valid',
+				'bg-vente'
+			]
+			if(row.private=="true")return {classes: classes[1]}
+			else return {classes: classes[0]}
+		}
+        function genericFm(value, row, index,field) {
+
+	        return '<a snd-data-'+row['_id']+'="'+field+'">'+value+'</a>';
+	       
+        }
+        function delFm(value, row) {
+        	//return '<a href="#" id="mdp" data-type="text" data-url="/utilisateurs/del" data-pk="'+row['_id']+'" data-name="_id">Supprimer</a>';
+        	console.log(row['idlot']);
+        	var retval="";
+        	if(row['idlot'] =="")retval='<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenterLot" onclick="idfontaine='+"'"+row['_id']+"'"+'"><i class="fas fa-qrcode"></i></button>&nbsp;'
+        	else retval='<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenterLot" onclick="idfontaine='+"'"+row['_id']+"'"+'"><i class="fas fa-qrcode"></i></button>&nbsp;'
+        	
+        	return retval+
+        		   '<button type="button" class="btn btn-danger" onclick="'+"confirmdel('"+row['_id']+"','feko-fontaine','feko-fontaine');"+'"><i class="fas fa-trash-alt"></i></button>&nbsp;'+
+               	   '<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-info editbt" onclick="editobj('+"'"+row['_id']+"'"+')"><i class="fas fa-pencil-alt"></i></button>';
+    	}
+		function assignQrCode(){
+			bootbox.confirm("Voulez-vous importer cet element ?", function(result) {
+			if(result){
+            	var xhr = new XMLHttpRequest();
+	            xhr.onreadystatechange = function(event) {
+                // XMLHttpRequest.DONE === 4
+                if (this.readyState === XMLHttpRequest.DONE) {
+                    if (this.status === 200) {
+                        console.log("pas vide");
+                        window.location.href = '/feko-fontaine';
+                    }
+                }
+                else {
+                    console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                    // window.location.href = '/listes';
+                }
+            }
+
+
+            xhr.open('GET', '/updatelot/'+idlot+'/'+lot+'/'+idfontaine, true);  
+            xhr.send(null);
+
+
+        }
+    });
+
+		}
+		
+        $(document).ready(function () {
+
+            $('#fontaine').addClass("active");
+
+            $('#lotqrcode').on('change', function() {
+	            idlot=this.value;
+	            lot=this.selectedOptions[0].label;
+			});
+
+			$('#mtable').on('expand-row.bs.table', function (index, row, $detail) {
+				if (isexp == 0) $("#mtable").bootstrapTable('expandRow', row)
+				console.log(row)
+
+			})
+
+            				// Advanced 1
+				$('.advancedAutoComplete').autoComplete({
+					resolver: 'custom',
+					events: {
+						search: function (qry, callback) {
+							// let's do a custom ajax call
+							var adr = document.getElementById("adresse").value;
+							var mdata=[];
+							$.ajax(
+								//'file.json',
+								"https://api-adresse.data.gouv.fr/search/?q="+adr+"&autocomplete=1"
+							).done(function (res) {
+								res.features.forEach(function(item){
+									console.log(item)
+									mdata.push({id: item.properties.id, text: item.properties.label,value : item });
+								})	
+					
+								callback(mdata)
+							});
+						}
+					}
+				});
+
+				$('.advancedAutoComplete').on('autocomplete.select', function (evt, item) {
+					console.log('select');
+					console.log(item)
+					var lat = item.value.geometry.coordinates[1];
+					var long = item.value.geometry.coordinates[0];
+					$('#lat').val(lat);
+					$('#long').val(long);
+					$('#idadr').val(item.id);
+					$('#num').val(item.value.properties.housenumber);
+					$('#rue').val(item.value.properties.street);
+					$('#cp').val(item.value.properties.postcode);
+					$('#ville').val(item.value.properties.city);
+
+
+					//ajouter CP + VILLE
+					
+					$('.basicAutoSelectSelected').html(JSON.stringify(item.value.geometry));
+				});
+				
+				$('#isprivate').on('change', function(){
+					if($(this).is(":checked")) {
+						//'checked' event code
+						$('#private').val("true")
+						return;
+   						}
+   						$('#private').val("false")
+					})
+
+				});
+         
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Material Dashboard by Creative Tim
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assets/demo/demo.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap-colorpicker.css" rel="stylesheet" />
+
+</head>
+
+<body class="">
+<div class="wrapper ">
+
+    <% include menu.ejs %>
+
+    <div class="main-panel">
+
+        <% include navbar.ejs %>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">Clients</h4>
+                                <p class="card-category"> Fonteko</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table data-toggle="table"
+                                           class="table"
+                                           data-url="/liste/feko-client"
+                                           data-pagination="true"
+                                           data-search="true"
+                                           data-show-columns="true"
+                                           data-page-size="20"
+                                           id= "mtable"
+                                           data-page-list="[20, 50, 100]">
+                                        <thead class=" text-primary">
+                                        	<th class="w-10" data-field="_id" data-formatter="clickFm">id</th>
+											<th class="w-25" data-field="email" data-formatter="clickFm">Email</th>
+											<th class="w-25" data-field="active" data-formatter="clickFm">Active</th>
+											<th class="w-25" data-field="name" data-formatter="clickFm">Nom</th>
+											<th class="w-25" data-field="date" data-formatter="dateFm">Date</th>
+											<th data-field="_id" data-valign="middle" data-formatter="editFm"></th>
+                                        </thead>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal"  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Liste des achats</h4>
+            </div>
+            <div class="modal-body">
+            
+                                 <table data-toggle="table"
+                                           class="table"
+                                           data-url="/liste/feko-qrcode"
+                                           id= "mtable2" >
+                                        <thead class=" text-primary">
+                                        	<th class="w-25" data-field="date" data-formatter="dateFm">Date</th>
+                                        <th class="w-25" data-field="initial" data-formatter="prixFm">Montant</th>
+                                        <th class="w-25" data-field="initial" data-formatter="creditFm">Credit</th>
+                                        <th class="w-25" data-field="cred" >Solde</th>
+											<th class="w-25" data-field="qrcode">Qrcode</th>
+                                        </thead>
+
+                                    </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>      
+            </div>
+        </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chartist JS -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/demo/demo.js"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/locale/bootstrap-table-fr-FR.min.js"></script>
+
+<script src="../assets/js/bootstrap-colorpicker.js"></script>
+<script src="../js2/miam.js"></script>
+<script src="../js2/bootbox.min.js"></script>
+
+
+<script type="text/javascript">
+
+    function dateFm(value, row){
+	    var d = new Date(value);
+	    var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0"+(d.getMonth()+1)).slice(-2) + "/" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+        return  datestring;
+    	}
+
+	function editFm(value, row) {
+        var c = this;
+        return '<button class="btn btn-sm  btn-warning" onclick="'+"confirmdel('"+row['_id']+"','feko-client','feko-client');"+'"><span class="fa fa-lock" aria-hidden="true"></span></button>';
+        }
+
+    function clickFm(value, row) {
+        
+        return `<div onclick='reloadTable("`+row['_id']+`")' data-toggle="modal" data-target="#myModal" >`+value+`</div>`;
+                
+        }
+        function prixFm(value, row){
+
+		var tot= parseInt(value)/100
+        return tot +" €" ;
+    }
+    function creditFm(value, row){
+
+
+        return  parseInt(value)/12.5;
+    }
+    
+    $(document).ready(function() {
+        $('#mnclient').addClass("active");
+    });
+    
+    
+
+    
+    function reloadTable(idc){
+	    var $table = $('#mtable2');
+        $('#mtable2').bootstrapTable('refresh', {
+            url: '/listeidc/feko-qrcode/' + idc
+        })
+    }
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

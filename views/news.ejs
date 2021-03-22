@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+
+<style>
+.mhei{
+	min-height:20px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+#img-upload{
+    width: 100%;
+}
+</style>
+<body>
+
+    <div class="wrapper">
+		
+		<% include navbar2 %>
+
+        <!-- Page Content  -->
+        <div id="content">
+        
+        <div class="row">
+       	  <div class="col-1">
+		  	<button type="button" class="btn btn-primary newbt" data-toggle="modal" data-target="#myModal" style="margin-top: 5px;">
+				 Ajouter
+			 </button>
+		  </div>
+          <div class="col-11">
+          <nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Accueil</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Actualités</li>
+			</ol>
+		  </nav>
+		  </div>
+		</div>
+		
+		
+		         <div class="row">
+
+        
+                               
+                                                
+                    <% items.forEach( function( todo ){ %>
+                    
+                    
+                    
+                        <div class="col-lg-4 cards">
+							<div class="card card-pricing card-raised">
+								<div class="card-body">
+								
+								
+								<div class="d-none" snd-data-<%=todo._id%>="_id"><%=todo._id%></div>
+								<h3 class="card-title" snd-data-<%=todo._id%>="titre"><%=todo.titre%></h3>
+									
+									<div class="card-icon icon-rose">
+										<a class="fancybox" rel="group" href="/upload/feko-news/<%=todo._id%>.jpg">
+											<div class="img-responsive thumbnail" style="background: white url(/upload/feko-news/<%=todo._id%>.jpg) no-repeat center center;background-size: 100%;height: 200px;">
+											</div>
+                                        </a>
+									</div>
+              
+									
+									<h6 class="card-category mhei" snd-data-<%=todo._id%>="d1"><%=todo.d1%></h6>
+									<h6 class="card-category mhei" snd-data-<%=todo._id%>="d2"><%=todo.d2%></h6>
+									<h6 class="card-category mhei" snd-data-<%=todo._id%>="d3"><%=todo.d3%></h6>
+              <p class="card-description">
+                <div class="mytile-desc" style="height: 120px;overflow: scroll;"><p snd-data-<%=todo._id%>="descl"><%=todo.descl%></p></div>
+              </p>
+              <p>
+              <button class="btn btn-primary btn-sm btn-round editbt" data-toggle="modal" data-target="#myModal" data-id="<%=todo._id%>">
+                                        Editer
+                                    </button>
+
+                                    <a class="btn btn-rose btn-sm btn-round" onclick="confirmdel('<%=todo._id%>','feko-news','feko-news');" role="button">Supprimer</a>
+                                    </p>
+            </div>
+          </div>
+        </div>
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    <% }); %>
+          
+                        </div>
+
+		
+
+
+		</div>
+		<!-- /Page Content  -->
+		
+		
+    </div>
+    <!-- /wrapper  -->
+    
+
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal"  role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+       <form action="/add/feko-news" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form" role="form" id="myform"  >
+            <input type="hidden" id="_id" name="_id" value="">
+            <input type="hidden" id="collection"  value="feko-news">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    Ajouter une news
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+
+
+    <div class="form-group">
+        <label>Image</label>
+        <div class="input-group">
+        
+    <input type="file" class="file" accept="image/*" name="image" id="image" >
+    <div class="input-group my-3">
+      <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
+      <div class="input-group-append">
+        <button type="button" class="browse btn btn-primary">Browse...</button>
+      </div>
+    </div>
+    
+        </div>
+        <img src="" id="preview" class="img-thumbnail">
+    </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" maxlength="27"  name="titre" id="titre" value="" class="form-control" placeholder="titre"  /></br>
+                            <input type="text" maxlength="34"  name="d1" id="d1" value="" class="form-control" placeholder="Ligne 1"  /></br>
+                            <input type="text" maxlength="34"  name="d2" id="d2" value="" class="form-control" placeholder="Ligne 2"  /></br>
+                            <input type="text" maxlength="34"  name="d3" id="d3" value="" class="form-control" placeholder="Ligne 3"  /></br>
+                        </div>
+                        <div class="form-group">
+                            <label>Description longue</label>
+                            <textarea class="form-control" rows="3" name="descl" id="descl"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Annuler
+                </button>
+                <input type="submit" value="Valider" class="btn btn-primary">
+            </div>
+        </div><!-- /.modal-content -->
+        </form>
+
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+    
+	<% include bsjs %>
+
+	
+
+	<script>
+
+	
+    
+        function genericFm(value, row, index,field) {
+
+	        return '<a snd-data-'+row['_id']+'="'+field+'">'+value+'</a>';
+	       
+        }
+     
+    
+        function delFm(value, row) {
+        	//return '<a href="#" id="mdp" data-type="text" data-url="/utilisateurs/del" data-pk="'+row['_id']+'" data-name="_id">Supprimer</a>';
+        	console.log(row['_id']);
+        	return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#qrcodeModal" onclick="'+"affqrcode('"+row['_id']+"');"+'"><i class="fas fa-qrcode"></i></button>&nbsp;'+
+        		   '<button type="button" class="btn btn-danger" onclick="'+"confirmdel('"+row['_id']+"','feko-fontaine','feko-fontaine');"+'"><i class="fas fa-trash-alt"></i></button>&nbsp;'+
+               	   '<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-info editbt" onclick="editobj('+"'"+row['_id']+"'"+')"><i class="fas fa-pencil-alt"></i></button>';
+    	}
+    
+    function affqrcode(id){
+	     var qrcode = new QRCode("qrcode");
+	    qrcode.makeCode(id);
+    }
+		
+		
+        $(document).ready(function () {
+
+            $('#news').addClass("active");
+            
+
+
+        });
+        
+        
+        
+        $(document).ready( function() {
+    			
+		
+		$(document).on("click", ".browse", function() {
+  var file = $(this).parents().find(".file");
+  file.trigger("click");
+});
+$('input[type="file"]').change(function(e) {
+  var fileName = e.target.files[0].name;
+  $("#file").val(fileName);
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    // get loaded data and render thumbnail.
+    document.getElementById("preview").src = e.target.result;
+  };
+  // read the image file as a data URL.
+  reader.readAsDataURL(this.files[0]);
+});	
+	});
+         
+    </script>
+</body>
+
+</html>

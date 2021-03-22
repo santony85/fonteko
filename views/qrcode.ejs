@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+
+<body>
+
+<div class="wrapper">
+
+    <% include navbar2 %>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Commandes</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+		<div class="row">
+			<div class="col-4">
+				<select
+						id="userId"
+						class="form-control"
+						name="userId"
+						data-source="/liste/feko-fontaine"
+						data-valueKey="_id"
+						data-displayKey="nom">
+				</select>
+			</div>
+			<div class="col-6" id="sandbox-container">
+				<div class="input-daterange input-group date" id="datepicker" data-provide="datepicker">
+					<input type="text" class="form-control" id="dstart"/>
+					<span class="input-group-text">to</span>
+					<input type="text" class="form-control" id="dend"/>
+				</div>
+
+			</div>
+			<div class="col-2">
+				<button type="button" class="btn btn-primary" onclick="findDateRange()">
+					Rechercher
+				</button>
+			</div>
+		</div>
+
+		<br>
+        <table data-toggle="table"
+               class="table table-condensed table-striped table-sm"
+               data-url="/liste/feko-qrcode"
+               data-pagination="true"
+               data-search="true"
+               data-show-columns="true"
+               data-page-size="100"
+               data-show-footer="true"
+               id="mtable"
+               data-page-list="[100, 200, 500, 1000]">
+
+            <thead>
+            <tr>
+
+
+                <th data-field="_id" class="d-none" data-formatter="genericFm">_id</th>
+                <th data-field="fontaine.nom" data-valign="middle" data-formatter="genericFm">Fontaine</th>
+                <th data-field="date" data-valign="middle" data-formatter="dateFm">Date</th>
+                <th data-field="email" data-valign="middle" data-formatter="genericFm">Email</th>
+                <th data-field="initial" data-align="right" data-formatter="prixFm" data-footer-formatter="priceFormatter">Prix</th>
+                <th data-field="initialc" data-align="right" data-formatter="genericFm" data-footer-formatter="credFormatter">Credit</th>
+                <th data-field="qrcode" data-align="right" data-formatter="genericFm">Qrcode</th>
+
+
+            </tr>
+            </thead>
+
+        </table>
+
+    </div>
+    <!-- /Page Content  -->
+
+
+</div>
+<!-- /wrapper  -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/addobj/feko-client" method="POST" id="myform">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" class="d-none" name="_id" id="_id">
+
+                    <div class="form-group">
+                        <label for="nom">Nom:</label>
+                        <input type="text" class="form-control" placeholder="Entrer le nom" name="nom" id="nom"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenom">Prenom:</label>
+                        <input type="text" class="form-control" placeholder="Entrer le prenom" name="prenom" id="prenom"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel">Telephone:</label>
+                        <input type="number" class="form-control" placeholder="Entrer le telephone" id="tel" name="tel"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" placeholder="Entrer l'email" id="email" name="email"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="text" class="form-control" placeholder="Enter password" id="pwd" name="mdp"
+                               required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<% include bsjs %>
+
+<script type="text/javascript">
+
+    function dateFm(value, row) {
+        var d = new Date(value);
+        var datestring = ("0" + d.getDate()).slice(-2) + "/" +
+                         ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear() + " " +
+                         ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+        return datestring;
+    }
+
+    function prixFm(value, row) {
+
+        var tot = parseInt(value) / 100
+        return tot + " €";
+    }
+
+    function creditFm(value, row) {
+
+
+        return parseInt(value) / 12.5;
+    }
+
+    function priceFormatter(data) {
+        var res = data.map(function (row) {
+            var val = 0;
+            //row.forEach(function (doc) {
+                val =  parseFloat(row.initial)
+            //})
+            return parseFloat(row.initial) /100;
+        }).reduce(function (sum, i) {
+            var ret = sum + i
+            return ret
+        }, 0).toFixed(2) + ' €';
+        return '<a><b>' + res + '</b></a>';
+    }
+
+	function credFormatter(data) {
+		var res = data.map(function (row) {
+			var val = 0;
+			//row.forEach(function (doc) {
+			val =  parseFloat(row.initial)
+			//})
+			return parseFloat(row.initialc);
+		}).reduce(function (sum, i) {
+			var ret = sum + i
+			return ret
+		}, 0);
+		return '<a><b>' + res + '</b></a>';
+	}
+
+    function genericFm(value, row, index, field) {
+
+        return '<a snd-data-' + row['_id'] + '="' + field + '">' + value + '</a>';
+
+    }
+
+
+    function delFm(value, row) {
+        //return '<a href="#" id="mdp" data-type="text" data-url="/utilisateurs/del" data-pk="'+row['_id']+'" data-name="_id">Supprimer</a>';
+        return '<button type="button" class="btn btn-danger" onclick="' + "confirmdel('" + row['_id'] + "');" + '"><i class="fas fa-trash-alt"></i></button>&nbsp;' +
+            '<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-info editbt" onclick="editobj(' + "'" + row['_id'] + "'" + ')"><i class="fas fa-pencil-alt"></i></button>';
+    }
+
+
+    $(document).ready(function () {
+
+        $('#qrcode').addClass("active");
+        const d = new Date()
+        const ye = new Intl.DateTimeFormat('en', {year: 'numeric'}).format(d)
+        const mo = new Intl.DateTimeFormat('en', {month: '2-digit'}).format(d)
+        const da = new Intl.DateTimeFormat('en', {day: '2-digit'}).format(d)
+        var de = `${ye}-${mo}-${da}`;
+        var ds = `${ye}-${mo}-01`;
+
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+        $('#sandbox-container .input-group.date').datepicker({
+            format: "dd/mm/yyyy",
+            language: "fr",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#dstart').datepicker('setDate', new Date(ds));
+
+        $('#dend').datepicker('setDate', new Date(de));
+
+		$('#mtable').on('load-success.bs.table', function (data) {
+			$.ajax({
+				url: '/listrapportsdate/0/' + ds + '/' + de,
+				type: 'get',
+				success: function (res) {
+					$("#mtable").bootstrapTable('load', res)
+				}
+			});
+		})
+
+		$('select[data-source]').each(function () {
+			var $select = $(this);
+			$select.append('<option value="0"></option>');
+			var i = 0;
+
+			$.ajax({
+				url: $select.attr('data-source'),
+			}).then(function (options) {
+				options.map(function (option) {
+					var $option = $('<option>');
+
+
+					$option
+							.val(option[$select.attr('data-valueKey')])
+							.text(option[$select.attr('data-displayKey')]);
+
+					$select.append($option);
+				});
+
+			});
+
+		});
+
+		$('#userId').on('change', function(){
+			var selectedText = $("#userId option:selected").val();
+
+			console.log($('#dstart').val())
+			var dates =  getDateYYYYMMDDFormat($('#dstart').val());
+			var datef =  getDateYYYYMMDDFormat($('#dend').val());
+
+			$.ajax({
+				url: '/listrapportsdate/'+selectedText+'/' + dates + '/' + datef,
+				type: 'get',
+				success: function (res) {
+					$("#mtable").bootstrapTable('load', res)
+
+				}
+			});
+
+		});
+
+
+    });
+
+
+    /*function getDateYYYYMMDDFormat(dateString){
+
+        var dateParts = dateString.split("/");
+
+// month is 0-based, that's why we need dataParts[1] - 1
+        var d = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+
+      // var d = new Date(date);
+        var datestring = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+        return datestring;
+    }*/
+
+    function getDateYYYYMMDDFormat(date){
+        var tabSplit = date.split("/", 3);
+        return tabSplit[2]+"-"+tabSplit[1]+"-"+tabSplit[0];
+    }
+
+    function findDateRange(){
+        var dates =  getDateYYYYMMDDFormat($('#dstart').val());
+        var datef =  getDateYYYYMMDDFormat($('#dend').val());
+        var selectedText = $("#userId option:selected").val();
+        $.ajax({
+            url:'/listrapportsdate/'+selectedText+'/'+dates+'/'+datef,
+            type:'get',
+            success:function(res){
+                $("#mtable").bootstrapTable('load', res)
+            }
+        });
+    }
+
+
+
+
+</script>
+</body>
+
+</html>

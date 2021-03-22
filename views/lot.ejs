@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<% include head %>
+
+<style>
+.mhei{
+	min-height:20px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+#img-upload{
+    width: 100%;
+}
+</style>
+
+<body>
+
+    <div class="wrapper">
+		
+		<% include navbar2 %>
+
+        <!-- Page Content  -->
+        <div id="content">
+        
+        <div class="row">
+       	  <div class="col-1">
+		  	<button type="button" class="btn btn-primary newbt" data-toggle="modal" data-target="#exampleModalCenter" style="margin-top: 5px;">
+				 Ajouter
+			 </button>
+
+		  </div>
+          <div class="col-11">
+          <nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Accueil</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Lots QrCode</li>
+			</ol>
+		  </nav>
+		  </div>
+		</div>
+		
+		<table data-toggle="table"
+		 	class="table table-condensed table-striped table-sm"
+            data-url="/liste/feko-lot"
+            data-pagination="true" 
+            data-search="true"
+            data-show-columns="true"
+            data-page-size="100"
+            id= "mtable"
+            data-page-list="[100, 200, 500, 1000]">
+            
+			<thead>
+				<tr>
+                  
+
+                    <th data-field="_id" class="d-none" data-formatter="genericFm">id</th>
+                    <th data-field="nom" data-formatter="genericFm">Nom</th>
+					<th data-field="qrcodes" data-formatter="genericFm10" val="10">10</th>
+					<th data-field="qrcodes" data-formatter="genericFm20">20</th>
+					<th data-field="qrcodes" data-formatter="genericFm30">30</th>
+					<th data-field="qrcodes" data-formatter="genericFm40">40</th>
+					<th data-field="qrcodes" data-formatter="genericFm60">60</th>
+					<th data-field="qrcodes" data-formatter="genericFm80">80</th>
+
+
+											
+											
+                                <th data-width="150px" data-field="_id"    data-valign="middle" data-formatter="delFm">Action</th>
+				</tr>
+			</thead>
+
+    </table>
+
+		</div>
+		<!-- /Page Content  -->
+		
+		
+    </div>
+    <!-- /wrapper  -->
+    
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    
+    <form action="/add/lot" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form" role="form" id="myform"  >
+            <input type="hidden" id="_id" name="_id" value="">
+            <input type="hidden" id="collection"  value="feko-lot">
+            
+            <input type="hidden" id="vente"  name="vente"  value="0">
+            <input type="hidden" id="qrcodes"  name="qrcodes"  value="">
+            <input type="hidden" id="assigned"  name="assigned"  value="false">
+            <input type="hidden" id="idfontaine"  name="idfontaine"  value="">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      	 <input type="text" class="d-none" name="_id" id="_id">
+      	 
+         <div class="form-group">
+		 	<label for="nom">Nom du lot:</label>
+		 	<input type="text" class="form-control" placeholder="Entrer le nom" name="nom" id="nom" required>
+		 </div>
+		 
+		 
+		 <div class="form-group">
+
+         	<label>Fichier</label>
+		 	<div class="input-group">
+
+				<input type="file" class="file" accept=".txt"  id="ffile10" required>
+				<div class="input-group my-3">
+					<span style="margin: 5px;">10</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file10">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile10">Browse...</button>
+					</div>
+				</div>
+
+				<input type="file" class="file" accept=".txt"   id="ffile20">
+				<div class="input-group my-3">
+					<span style="margin: 5px;">20</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file20">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile20">Browse...</button>
+					</div>
+				</div>
+
+				<input type="file" class="file" accept=".txt"  id="ffile30">
+				<div class="input-group my-3">
+					<span style="margin: 5px;">30</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file30">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile30">Browse...</button>
+					</div>
+				</div>
+
+				<input type="file" class="file" accept=".txt"  id="ffile40">
+				<div class="input-group my-3">
+					<span style="margin: 5px;">40</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file40">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile40">Browse...</button>
+					</div>
+				</div>
+
+				<input type="file" class="file" accept=".txt"  id="ffile60">
+				<div class="input-group my-3">
+					<span style="margin: 5px;">60</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file60">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile60">Browse...</button>
+					</div>
+				</div>
+
+				<input type="file" class="file" accept=".txt"  id="ffile80">
+				<div class="input-group my-3">
+					<span style="margin: 5px;">80</span>
+					<input type="text" class="form-control" disabled placeholder="Upload File" id="file80">
+					<div class="input-group-append">
+						<button type="button" class="browse btn btn-primary" id="bfile80">Browse...</button>
+					</div>
+				</div>
+
+			</div>
+			<div class="form-group">
+         		<label>Nombre de QrCode</label>
+				<div class="input-group">
+					<input type="text" id="nbqrcode"  name="nbqrcode"  value="0" readonly>
+				</div>
+			</div>
+		</div>
+		 
+
+
+
+		 
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary" >Envoyer</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+
+    
+	<% include bsjs %>
+	
+
+	<script>
+
+
+		var result = [];
+
+        function genericFm(value, row, index,field) {
+
+	        return '<a snd-data-'+row['_id']+'="'+field+'">'+value+'</a>';
+	       
+        }
+
+		function genericFm10(data, rown, index,field) {
+			return data.map(function (row) {
+				//console.log(row.initial)
+				if(row.initial=="10")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+
+		function genericFm20(data, rown, index,field) {
+			return data.map(function (row) {
+				if(row.initial=="20")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+
+		function genericFm30(data, rown, index,field) {
+			return data.map(function (row) {
+				if(row.initial=="30")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+
+		function genericFm40(data, rown, index,field) {
+			return data.map(function (row) {
+				if(row.initial=="40")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+		function genericFm60(data, rown, index,field) {
+			return data.map(function (row) {
+				if(row.initial=="60")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+
+		function genericFm80(data, rown, index,field) {
+			return data.map(function (row) {
+				if(row.initial=="80")return 1
+				else return 0
+			}).reduce(function (sum, i) {
+				return sum+i
+			},0)
+
+		}
+
+        function delFm(value, row) {
+        	//return '<a href="#" id="mdp" data-type="text" data-url="/utilisateurs/del" data-pk="'+row['_id']+'" data-name="_id">Supprimer</a>';
+        	console.log(row['_id']);
+        	return '<!--<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#qrcodeModal" onclick="'+"affqrcode('"+row['_id']+"');"+'"><i class="fas fa-qrcode"></i></button>&nbsp;-->'+
+        		   '<button type="button" class="btn btn-danger" onclick="'+"confirmdel('"+row['_id']+"','feko-lot','feko-lot');"+'"><i class="fas fa-trash-alt"></i></button>&nbsp;'+
+               	   '<button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-info editbt" onclick="editobj('+"'"+row['_id']+"'"+')"><i class="fas fa-pencil-alt"></i></button>';
+    	}
+    
+    function affqrcode(id){
+	     var qrcode = new QRCode("qrcode");
+	    qrcode.makeCode(id);
+    }
+		
+		
+        $(document).ready(function () {
+
+            $('#lot').addClass("active");
+
+
+
+
+        });
+        
+        $(document).ready( function() {
+    			
+
+
+		$(document).on("click", ".browse", function() {
+			console.log($(this)[0].id)
+			var mid=$(this)[0].id.substr(1);
+  			var file = $(this).parents().find(".file#f"+mid);
+  			file.trigger("click");
+		});
+
+
+$('input[type="file"]').change(function(e) {
+  var fileName = e.target.files[0].name;
+
+  var mid=e.currentTarget.id.substr(1);
+  var qte=mid.slice(-2);
+  $("#"+mid).val(fileName);
+
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+	  var lines=e.target.result.split("\n");
+      // get loaded data and render thumbnail
+
+	  //var headers=lines[0].split(";");
+
+
+	  for(var i=0;i<lines.length;i++){
+	  	var obj = {};
+	  	var currentline=lines[i];
+	  	//for(var j=0;j<headers.length;j++){
+		  obj['_id'] = currentline;
+		  obj['initial'] = qte;
+	  	//}
+	  result.push(obj);
+  	  }
+    //compte records 
+     document.getElementById("nbqrcode").value = result.length ;
+     document.getElementById("qrcodes").value = JSON.stringify(result);
+
+
+  };
+  // read the image file as a data URL.
+  reader.readAsText(this.files[0]);
+});	
+	});
+         
+    </script>
+</body>
+
+</html>
